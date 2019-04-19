@@ -9,9 +9,8 @@ Give me A STAR if you see it is helpful for you.
 Thanks
 
 references
-
-https://facebook.github.io/react-native/docs/tutorial
-https://github.com/jscomplete/react-native-essential-training
-https://mobx.js.org
-https://www.tutorialspoint.com/typescript/
-https://www.tutorialspoint.com/es6
+1. https://facebook.github.io/react-native/docs/tutorial
+2. https://github.com/jscomplete/react-native-essential-training
+3. https://mobx.js.org
+4. https://www.tutorialspoint.com/typescript/
+5. https://www.tutorialspoint.com/es6
