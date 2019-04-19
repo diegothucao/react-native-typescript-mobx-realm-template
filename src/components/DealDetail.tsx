@@ -11,10 +11,9 @@ import {
 import { observer, inject } from "mobx-react"
 import { priceDisplay } from '../util/util'
 import DealDetailStore from '../stores/DealDetailStore'
-import { UDeal } from '../models/Deal'
 
 export interface Props {
-  initialDealData: UDeal,
+  dealId: string,
   onBack: () => any,
   dealDetailStore?: DealDetailStore
 }
@@ -23,8 +22,7 @@ export interface Props {
 class DealDetail extends React.Component<Props> {
 
   async componentDidMount() {
-    this.props.dealDetailStore && this.props.dealDetailStore.setInitialDeal(this.props.initialDealData)
-    this.props.initialDealData && this.props.dealDetailStore && this.props.dealDetailStore.fetchDetail(this.props.initialDealData.key)
+    this.props.dealDetailStore && this.props.dealDetailStore.fetchDetail(this.props.dealId)
   }
 
   openDealUrl = () => {

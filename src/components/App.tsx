@@ -35,7 +35,7 @@ class App extends React.Component<Props> {
       return (
         <View style={styles.main}>
           <DealDetail
-            initialDealData={appStore.currentDeal}
+            dealId={appStore.currentDealId}
             onBack={this.unsetCurrentDeal}
           />
         </View>
@@ -45,7 +45,7 @@ class App extends React.Component<Props> {
     return (
       <View style={styles.main}>
         <SearchBar searchDeals={this.searchDeals} searchTerm={appStore.searchTerm.get()}/>
-        <DealList deals={appStore.deals} onItemPress={this.setCurrentDeal} />
+        <DealList deals={Array.from(appStore.deals)} onItemPress={this.setCurrentDeal} />
       </View>
     )
   }

@@ -1,12 +1,12 @@
 import { observable, action, runInAction, computed, IObservableValue } from 'mobx'
-import { Deals } from '../models/Deal'
+import { realmMain, DealObjectName } from './../models/RealmFactory'
 import { dealService } from '../services/deal/DealService'
 
 export default class AppStore {
     @observable isLoading: boolean = true
     @observable isFailure: boolean = false
     @observable searchTerm: IObservableValue<string> = observable.box("")
-    @observable deals: Deals = []
+    @observable deals: any = null
     @observable currentDealId: string | null = null
 
     constructor() {
@@ -19,7 +19,17 @@ export default class AppStore {
         dealService.searchData(this.searchTerm.get()).then(data => {
             runInAction(() => {
                 this.isLoading = false
-                this.deals = data
+                data.forEach(item => {
+                    realmMain.write(() => {
+                        realmMain.create(DealObjectName, item, true)
+                      })
+                  })
+
+                  if (this.searchTerm.get().length > 0) {
+                    this.deals = realmMain.objects(DealObjectName).filtered('title CONTAINS[c] "' + this.searchTerm.get() + '"')
+                }else {
+                    this.deals = realmMain.objects(DealObjectName)
+                }
             })
         })
     }
@@ -36,9 +46,5 @@ export default class AppStore {
     @action
     unsetCurrentDeal() {
         this.currentDealId = null
-    }
-
-    @computed get currentDeal() {
-        return this.deals.find((deal) => deal.key === this.currentDealId)
     }
 }

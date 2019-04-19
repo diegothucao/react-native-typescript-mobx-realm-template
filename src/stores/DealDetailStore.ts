@@ -1,22 +1,21 @@
 import { observable, action } from 'mobx'
-import Deal, { UDeal } from '../models/Deal'
+import { realmMain, DealObjectName } from './../models/RealmFactory'
 import { dealService } from '../services/deal/DealService'
 
 export default class DealDetailStore {
     @observable isLoading: boolean = true
     @observable isFailure:boolean = false
-    @observable deal: UDeal | null = null
-
-    @action setInitialDeal(data: UDeal) {
-        this.deal = data
-        this.isLoading = false
-    }
+    @observable deal: any | null = null
 
     @action async fetchDetail(dealId: string) {
         try {
-            const data = await dealService.fetchById(dealId)     
+            this.deal = realmMain.objectForPrimaryKey(DealObjectName, dealId)
+            const data = await dealService.fetchById(dealId)    
+            realmMain.write(() => {
+                realmMain.create(DealObjectName, data, true)
+              }) 
+                this.deal = realmMain.objectForPrimaryKey(DealObjectName, dealId)
                 this.isLoading = false
-                this.deal = data
         } catch (e) {
                 this.isLoading = false
                 this.isFailure = true

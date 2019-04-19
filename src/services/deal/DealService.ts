@@ -1,14 +1,13 @@
 import CommonService from './../CommonService'
-import Deal from '../../models/Deal'
 import { apiHost } from '../../util/util'
 
-class DealService extends CommonService<Deal> {
+class DealService extends CommonService<any> {
     constructor() {
         super()
         this.rootURL = apiHost + "/api/deals"
     }
 
-    async searchData(search: String): Promise<Deal[]> {
+    async searchData(search: String): Promise<any[]> {
         try {
             const response = await fetch(this.rootURL + '?searchTerm=' + search)
             if (!response.ok) {
