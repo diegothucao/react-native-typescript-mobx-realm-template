@@ -45,7 +45,7 @@ class App extends React.Component<Props> {
     return (
       <View style={styles.main}>
         <SearchBar searchDeals={this.searchDeals} searchTerm={appStore.searchTerm.get()}/>
-        <DealList deals={Array.from(appStore.deals)} onItemPress={this.setCurrentDeal} />
+        {appStore.deals && (<DealList deals={Array.from(appStore.deals)} onItemPress={this.setCurrentDeal} />)}
       </View>
     )
   }
