@@ -36,4 +36,4 @@ export const CauseSchema: ObjectSchema = {
     }
   }
 
-export const realmMain = new Realm({schema: [DealSchema]})
+export const realmMain = new Realm({schema: [DealSchema, CauseSchema, UserSchema]})
