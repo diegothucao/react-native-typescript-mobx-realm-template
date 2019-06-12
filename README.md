@@ -1,4 +1,4 @@
-# react-native-typescript-mobx-realm-example
+# React Native, Typescript, Mobx and Realm
 This is an essential example to build react-native app using Typescript, Mobx and Realm
 
 1. Clone the [repo](https://github.com/diegothucao/react-native-typescript-mobx-realm-template)
